@@ -28,6 +28,7 @@ sliders.forEach(slider => {
         slider.classList.add('active');
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
+        e.preventDefault();
     });
 
     slider.addEventListener('mouseleave', () => {
@@ -48,26 +49,6 @@ sliders.forEach(slider => {
         slider.scrollLeft = scrollLeft - walk;
     });
 
-    // Touch events for mobile
-    slider.addEventListener('touchstart', (e) => {
-        isDown = true;
-        slider.classList.add('active');
-        startX = e.touches[0].pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-    });
-
-    slider.addEventListener('touchend', () => {
-        isDown = false;
-        slider.classList.remove('active');
-    });
-
-    slider.addEventListener('touchmove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.touches[0].pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-        slider.scrollLeft = scrollLeft - walk;
-    });
 }); 
 
 // Слайдер отзывов
