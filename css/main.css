@@ -22,6 +22,10 @@ body {
     overflow-x: hidden;
 }
 
+main {
+	overflow-x: hidden;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-primary);
     font-weight: 600;
@@ -55,6 +59,16 @@ h1, h2, h3, h4, h5, h6 {
 .overlay-content h3 {
     font-family: var(--font-primary);
     font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .footer-contact {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+		}
 }
 
 .footer-links h3,
@@ -138,6 +152,12 @@ h1, h2, h3, h4, h5, h6 {
 .logo img {
     height: 50px;
     width: auto;
+}
+
+@media (max-width: 768px) {
+    .logo {
+        font-size: 1.5rem;
+    }
 }
 
 .nav-menu {
@@ -311,7 +331,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .top-contact {
         display: none;
     }
@@ -341,6 +361,12 @@ h1, h2, h3, h4, h5, h6 {
         display: none;
     }
 
+    .workshop-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
     .footer-content {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -1265,12 +1291,14 @@ section {
 .story-text h2 {
     color: #4a3427;
     margin-bottom: 1.5rem;
+    font-size: 2.5rem;
 }
 
 .story-text p {
     margin-bottom: 1rem;
     line-height: 1.8;
     color: #666;
+    font-size: 1.1rem;
 }
 
 .story-image img {
@@ -1431,28 +1459,71 @@ section {
 }
 
 /* Responsive adjustments for about page */
+@media (max-width: 1024px) {
+    .story-content {
+        gap: 3rem;
+    }
+
+    .story-text h2 {
+        font-size: 2.2rem;
+    }
+
+    .story-text p {
+        font-size: 1rem;
+    }
+
+    .story-image img {
+        height: 350px;
+    }
+}
+
 @media (max-width: 768px) {
+    .about-story {
+        padding: 3rem 0;
+    }
+
     .story-content {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
 
+    .story-text {
+        text-align: center;
+    }
+
+    .story-text h2 {
+        font-size: 2rem;
+    }
+
     .story-image img {
         height: 300px;
+        max-width: 500px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.benefit-details {
+	list-style: none;
+}
+
+@media (max-width: 480px) {
+    .about-story {
+        padding: 2rem 0;
     }
 
-    .process-slide {
-        flex: 0 0 250px;
+    .story-text h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
     }
 
-    .team-member img {
-        width: 150px;
-        height: 150px;
+    .story-text p {
+        font-size: 0.95rem;
     }
 
-    .cta-buttons {
-        flex-direction: column;
-        align-items: center;
+    .story-image img {
+        height: 250px;
+        border-radius: 8px;
     }
 }
 
@@ -1907,8 +1978,8 @@ section {
     background: #f9f5f2;
 }
 
-/* Schedule styles */
-.schedule-container {
+/* Updated Schedule Styles */
+.schedule-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
@@ -1916,288 +1987,159 @@ section {
 }
 
 .schedule-card {
-    display: flex;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    position: relative;
 }
 
-.date {
+.schedule-card:hover {
+    transform: translateY(-5px);
+}
+
+.schedule-status {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+}
+
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.schedule-status.available .status-badge {
+    background-color: #2ecc71;
+}
+
+.schedule-status.limited .status-badge {
+    background-color: #f39c12;
+}
+
+.schedule-status.special .status-badge {
+    background-color: #9b59b6;
+}
+
+.schedule-date {
     background: #9c6644;
     color: #fff;
     padding: 1.5rem;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 100px;
 }
 
-.date .day {
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.details {
-    padding: 1.5rem;
-    flex-grow: 1;
-}
-
-.details h3 {
-    color: #4a3427;
-    margin-bottom: 0.5rem;
-}
-
-.details p {
-    color: #666;
-    margin-bottom: 0.5rem;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-    .schedule-card {
-        flex-direction: column;
-    }
-
-    .date {
-        padding: 1rem;
-    }
-
-    .workshop-cta h2 {
-        font-size: 2rem;
-    }
-}
-
-/* Story Stats styles */
-.story-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 2rem;
-    text-align: center;
-}
-
-.stat-item {
-    padding: 1.5rem;
-    background: #f9f5f2;
-    border-radius: 10px;
-}
-
-.stat-number {
-    display: block;
+.schedule-date .day {
     font-size: 2.5rem;
-    font-weight: bold;
-    color: #9c6644;
-    margin-bottom: 0.5rem;
+    font-weight: 700;
+    line-height: 1;
+    display: block;
 }
 
-.stat-label {
+.schedule-date .month {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.schedule-time {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.schedule-time i {
+    margin-right: 0.5rem;
+}
+
+.schedule-details {
+    padding: 1.5rem;
+}
+
+.schedule-details h3 {
+    font-size: 1.25rem;
     color: #4a3427;
-    font-size: 1.1rem;
-}
-
-/* Value Details styles */
-.value-details {
-    list-style: none;
-    margin-top: 1rem;
-}
-
-.value-details li {
-    margin-bottom: 0.5rem;
-    color: #666;
-    position: relative;
-    padding-left: 1.5rem;
-}
-
-.value-details li:before {
-    content: "•";
-    color: #9c6644;
-    position: absolute;
-    left: 0;
-}
-
-/* Step Details styles */
-.step-details {
-    list-style: none;
-    margin-top: 1rem;
-}
-
-.step-details li {
-    margin-bottom: 0.5rem;
-    color: #666;
-    position: relative;
-    padding-left: 1.5rem;
-}
-
-.step-details li:before {
-    content: "✓";
-    color: #9c6644;
-    position: absolute;
-    left: 0;
-}
-
-/* Certification Details styles */
-.certification-details {
-    list-style: none;
-    margin-top: 1rem;
-    text-align: left;
-}
-
-.certification-details li {
-    margin-bottom: 0.5rem;
-    color: #666;
-    position: relative;
-    padding-left: 1.5rem;
-}
-
-.certification-details li:before {
-    content: "→";
-    color: #9c6644;
-    position: absolute;
-    left: 0;
-}
-
-/* Team Member styles */
-.member-image {
-    position: relative;
     margin-bottom: 1rem;
 }
 
-.member-social {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0,0,0,0.7);
-    padding: 1rem;
+.schedule-info {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.schedule-info .info-item {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.member-image:hover .member-social {
-    opacity: 1;
-}
-
-.member-social a {
-    color: #fff;
-    font-size: 1.2rem;
-    transition: color 0.3s;
-}
-
-.member-social a:hover {
-    color: #9c6644;
-}
-
-.member-role {
-    color: #9c6644;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-}
-
-.member-bio {
-    color: #666;
+    align-items: center;
     font-size: 0.9rem;
+    color: #666;
 }
 
-/* Gallery styles */
-.gallery-grid {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 1.5rem;
-	margin-top: 2rem;
-	padding: 0 1rem;
+.schedule-info .info-item i {
+    width: 20px;
+    color: #9c6644;
+    margin-right: 0.75rem;
 }
 
-.gallery-item {
-	position: relative;
-	border-radius: 10px;
-	overflow: hidden;
-	aspect-ratio: 1;
+.schedule-card .cta-button {
+    display: inline-block;
+    width: 100%;
+    padding: 0.75rem;
+    background: #9c6644;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 1.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
 }
 
-.gallery-item.large {
-	grid-column: span 2;
-	aspect-ratio: 2/1;
+.schedule-card .cta-button:hover {
+    background: #7d513a;
 }
 
-.gallery-item img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	transition: transform 0.5s ease;
+/* Responsive Styles for Schedule Section */
+@media (max-width: 1024px) {
+    .schedule-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.gallery-item:hover img {
-	transform: scale(1.05);
+@media (max-width: 768px) {
+    .schedule-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .schedule-date {
+        padding: 1.25rem;
+    }
+
+    .schedule-details {
+        padding: 1.25rem;
+    }
 }
 
-.gallery-overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
-	display: flex;
-	align-items: flex-end;
-	padding: 2rem;
-	opacity: 0;
-	transition: opacity 0.3s ease;
-}
+@media (max-width: 480px) {
+    .schedule-date .day {
+        font-size: 2rem;
+    }
 
-.gallery-item:hover .gallery-overlay {
-	opacity: 1;
-}
+    .schedule-date .month {
+        font-size: 1rem;
+    }
 
-.overlay-content {
-	color: #fff;
-	transform: translateY(20px);
-	transition: transform 0.3s ease;
-}
+    .schedule-details h3 {
+        font-size: 1.1rem;
+    }
 
-.gallery-item:hover .overlay-content {
-	transform: translateY(0);
-}
-
-.gallery-category {
-	display: inline-block;
-	background: #9c6644;
-	color: #fff;
-	padding: 0.3rem 1rem;
-	border-radius: 20px;
-	font-size: 0.8rem;
-	margin-bottom: 0.8rem;
-}
-
-.overlay-content h3 {
-	font-size: 1.2rem;
-	margin-bottom: 0.5rem;
-}
-
-.overlay-content p {
-	font-size: 0.9rem;
-	opacity: 0.9;
-}
-
-@media (max-width: 992px) {
-	.gallery-grid {
-			grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@media (max-width: 576px) {
-	.gallery-grid {
-			grid-template-columns: 1fr;
-	}
-	
-	.gallery-item.large {
-			grid-column: auto;
-			aspect-ratio: 1;
-	}
+    .schedule-info .info-item {
+        font-size: 0.85rem;
+    }
 }
 
 /* Workshop Preview styles */
@@ -2373,7 +2315,6 @@ section {
     .workshop-content {
         grid-template-columns: 1fr;
     }
-
 }
 
 @media (max-width: 768px) {
@@ -2386,14 +2327,104 @@ section {
     }
 }
 
-/* Updated Workshop Intro Styles */
-.benefits-grid {
+/* Gallery styles */
+.gallery-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin-top: 2rem;
+    padding: 0 1rem;
 }
 
+.gallery-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 1;
+}
+
+.gallery-item.large {
+    grid-column: span 2;
+    aspect-ratio: 2/1;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.overlay-content {
+    color: #fff;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .overlay-content {
+    transform: translateY(0);
+}
+
+.gallery-category {
+    display: inline-block;
+    background: #9c6644;
+    color: #fff;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.overlay-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.overlay-content p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+@media (max-width: 992px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-item.large {
+        grid-column: auto;
+        aspect-ratio: 1;
+    }
+}
+
+/* Benefits styles */
 .benefit-card {
     background: #fff;
     border-radius: 12px;
@@ -2448,132 +2479,13 @@ section {
     font-size: 1.2rem;
 }
 
-/* Updated Schedule Styles */
-.schedule-grid {
+.benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
     margin-top: 2rem;
 }
 
-.schedule-card {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
-    position: relative;
-}
-
-.schedule-card:hover {
-    transform: translateY(-5px);
-}
-
-.schedule-status {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 1;
-}
-
-.status-badge {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #fff;
-}
-
-.schedule-status.available .status-badge {
-    background-color: #2ecc71;
-}
-
-.schedule-status.limited .status-badge {
-    background-color: #f39c12;
-}
-
-.schedule-status.special .status-badge {
-    background-color: #9b59b6;
-}
-
-.schedule-date {
-    background: #9c6644;
-    color: #fff;
-    padding: 1.5rem;
-    text-align: center;
-}
-
-.schedule-date .day {
-    font-size: 2.5rem;
-    font-weight: 700;
-    line-height: 1;
-    display: block;
-}
-
-.schedule-date .month {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-top: 0.25rem;
-    display: block;
-}
-
-.schedule-time {
-    margin-top: 0.75rem;
-    font-size: 0.9rem;
-    opacity: 0.9;
-}
-
-.schedule-time i {
-    margin-right: 0.5rem;
-}
-
-.schedule-details {
-    padding: 1.5rem;
-}
-
-.schedule-details h3 {
-    font-size: 1.25rem;
-    color: #4a3427;
-    margin-bottom: 1rem;
-}
-
-.schedule-info {
-    display: grid;
-    gap: 0.75rem;
-}
-
-.schedule-info .info-item {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.schedule-info .info-item i {
-    width: 20px;
-    color: #9c6644;
-    margin-right: 0.75rem;
-}
-
-.schedule-card .cta-button {
-    display: inline-block;
-    width: 100%;
-    padding: 0.75rem;
-    background: #9c6644;
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 6px;
-    margin-top: 1.5rem;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.schedule-card .cta-button:hover {
-    background: #7d513a;
-}
-
-/* Responsive Styles for Updated Sections */
 @media (max-width: 1024px) {
     .benefits-grid {
         grid-template-columns: 1fr;
@@ -2581,19 +2493,7 @@ section {
 }
 
 @media (max-width: 768px) {
-    .schedule-grid {
-        grid-template-columns: 1fr;
-    }
-
     .benefit-card {
-        padding: 1.25rem;
-    }
-
-    .schedule-date {
-        padding: 1.25rem;
-    }
-
-    .schedule-details {
         padding: 1.25rem;
     }
 }
@@ -2605,21 +2505,5 @@ section {
 
     .benefit-card p {
         font-size: 0.9rem;
-    }
-
-    .schedule-date .day {
-        font-size: 2rem;
-    }
-
-    .schedule-date .month {
-        font-size: 1rem;
-    }
-
-    .schedule-details h3 {
-        font-size: 1.1rem;
-    }
-
-    .schedule-info .info-item {
-        font-size: 0.85rem;
     }
 }
